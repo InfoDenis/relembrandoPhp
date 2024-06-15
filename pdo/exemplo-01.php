@@ -1,13 +1,14 @@
 <?php
+//PDO em Maria DB via Xampp
+$conn = new PDO("mysql:dbname=dbphp;host=localhost", "root", ""); //Objeto de conexão
 
-$conn = new PDO("mysql:dbname=dbphp;host=localhost", "root", "");
+$stmt = $conn->prepare("SELECT * FROM tb_usuarios ORDER BY desLogin"); //Método para preparar query
 
-$stmt = $conn->prepare("SELECT * FROM tb_usuarios ORDER BY desLogin");
+$stmt->execute(); //Execução da Query
 
-$stmt->execute();
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC); //Recebendo resultados da query
 
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+//Tratando/Exibindo resultados da query
 foreach ($results as $row) {
   
     foreach ($row as $key => $value) {
