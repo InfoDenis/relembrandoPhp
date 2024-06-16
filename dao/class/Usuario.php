@@ -81,10 +81,54 @@ class Usuario {
     $retorno = array();
     $retorno["idUsuario" ] = $this->getIdUsuario();
     $retorno["login"     ] = $this->getDesLogin();
-    $retorno["denha"     ] = $this->getDesSenha();
+    $retorno["senha"     ] = $this->getDesSenha();
     $retorno["dtCadastro"] = $this->getDtCadastro()->format("d/m/Y H:i:s");
 
     return json_encode($retorno);
+
+  }
+
+  public static function getList() {
+
+    $sql = new Sql();
+    
+    return $sql->select("SELECT * FROM tb_usuarios ORDER BY desLogin");
+
+  }
+
+  public static function search($login) {
+
+    $sql = new Sql();
+    
+    return $sql->select("SELECT * FROM tb_usuarios WHERE desLogin LIKE :SEARCH ORDER BY desLogin", array(
+      ':SEARCH' => "%$login%"
+    ));
+
+  }
+
+  public function login($login, $pass) {
+
+    $sql = new Sql();
+
+    $results = $sql->select("SELECT * FROM tb_usuarios WHERE desLogin = :LOGIN AND desSenha = :SENHA", array(
+      ":LOGIN" => $login,
+      ":SENHA" => $pass
+    ));
+
+    if (isset($results[0])) {
+
+      $row = $results[0];
+
+      $this->setIdUsuario($row['idUsuario']);
+      $this->setDesLogin($row['desLogin']);
+      $this->setDesSenha($row['desSenha']);
+      $this->setDtCadastro(new DateTime($row['dtCadastro']));
+
+    } else {
+
+      throw new Exception("Login e/ou Senha invalidos!");
+
+    }
 
   }
 
