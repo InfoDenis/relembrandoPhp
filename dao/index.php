@@ -50,10 +50,20 @@ require_once("config.php");
 
 //Exemplo 7 utilizando a classe Usuario.php para fazer o update de um novo usuário
 
+// $usuario = new Usuario();
+
+// $usuario->loadById(8);
+
+// $usuario->update("professor", "!@#$%");
+
+// echo $usuario;
+
+
+//Exemplo 8 utilizando a classe Usuario.php para fazer o delete de usuário
 $usuario = new Usuario();
 
-$usuario->loadById(8);
+$usuario->loadById(7);
 
-$usuario->update("professor", "!@#$%");
+$usuario->delete();
 
 echo $usuario;
