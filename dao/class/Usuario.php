@@ -7,6 +7,13 @@ class Usuario {
   private $desSenha;
   private $dtCadastro;
 
+  public function __construct($login = "", $senha = "") {
+
+    $this->setDesLogin($login);
+    $this->setDesSenha($senha);
+
+  }
+
   public function getIdUsuario() {
 
     return $this->idUsuario;
@@ -65,12 +72,7 @@ class Usuario {
 
     if (isset($results[0])) {
 
-      $row = $results[0];
-
-      $this->setIdUsuario($row['idUsuario']);
-      $this->setDesLogin($row['desLogin']);
-      $this->setDesSenha($row['desSenha']);
-      $this->setDtCadastro(new DateTime($row['dtCadastro']));
+      $this->setData($results[0]);
 
     }
 
@@ -117,16 +119,39 @@ class Usuario {
 
     if (isset($results[0])) {
 
-      $row = $results[0];
-
-      $this->setIdUsuario($row['idUsuario']);
-      $this->setDesLogin($row['desLogin']);
-      $this->setDesSenha($row['desSenha']);
-      $this->setDtCadastro(new DateTime($row['dtCadastro']));
+      $this->setData($results[0]);
 
     } else {
 
       throw new Exception("Login e/ou Senha invalidos!");
+
+    }
+
+  }
+
+  public function setData($data) {
+
+    $this->setIdUsuario($data['idUsuario']);
+    $this->setDesLogin($data['desLogin']);
+    $this->setDesSenha($data['desSenha']);
+    $this->setDtCadastro(new DateTime($data['dtCadastro']));
+
+  }
+
+  public function insert() {
+
+    $sql = new Sql();
+    //sp_usuarios_insert - sp = storage procedure, usuarios = usuarios, insert = ação
+    //CALL - chama a procedure no Mysql, para SQLSERVER usar EXECUTE
+    //Para tal foi criado uma procedure no banco onde esta irá inserir o usuário e retornar os valores inseridos
+    $results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASS)", array(
+      ':LOGIN' => $this->getDesLogin(),
+      ':PASS'  => $this->getDesSenha()
+    ));
+
+    if (isset($results)) {
+
+      $this->setData($results[0]);
 
     }
 

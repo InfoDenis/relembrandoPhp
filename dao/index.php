@@ -34,7 +34,15 @@ require_once("config.php");
 
 
 //Exemplo 5 utilizando a classe Usuario.php para carregar um usuário usando login e senha
-$usuario = new Usuario();
-$usuario->login("root", "!@#$123");
+// $usuario = new Usuario();
+// $usuario->login("root", "!@#$123");
 
-echo $usuario;
+// echo $usuario;
+
+
+//Exemplo 6 utilizando a classe Usuario.php para fazer o insert de um novo usuário
+$aluno = new Usuario("aluno2", "1234");
+
+$aluno->insert();
+
+echo $aluno;
