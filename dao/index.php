@@ -41,8 +41,19 @@ require_once("config.php");
 
 
 //Exemplo 6 utilizando a classe Usuario.php para fazer o insert de um novo usuário
-$aluno = new Usuario("aluno2", "1234");
+// $aluno = new Usuario("aluno2", "1234");
 
-$aluno->insert();
+// $aluno->insert();
 
-echo $aluno;
+// echo $aluno;
+
+
+//Exemplo 7 utilizando a classe Usuario.php para fazer o update de um novo usuário
+
+$usuario = new Usuario();
+
+$usuario->loadById(8);
+
+$usuario->update("professor", "!@#$%");
+
+echo $usuario;
