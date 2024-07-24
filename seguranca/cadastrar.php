@@ -11,7 +11,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array(
-  "secret" => "6LfbAxcqAAAAAHSfvqUT9VsJPeZhfTZd6QCwG6ig",
+  "secret" => "g",
   "response" => $_POST["g-recaptcha-response"],
   "remoteip" => $_SERVER["REMOTE_ADDR"]
 )));

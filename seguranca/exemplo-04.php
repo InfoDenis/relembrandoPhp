@@ -13,7 +13,7 @@
 
   <input type="email" name="inputEmail">
   <button class="g-recaptcha" 
-        data-sitekey="6LfbAxcqAAAAAAKAj0qLkCC679wfxuPzqizQKz2q" 
+        data-sitekey="g" 
         data-callback='onSubmit' 
         data-action='submit'>Submit</button>
 
