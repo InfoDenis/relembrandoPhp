@@ -6,7 +6,7 @@
 $id = (isset($_GET["id"])) ? $_GET["id"] : 3;
 
 //Verificações simples podem evitar sql injection, mas a melhor maneira de se evitar é usando as boas práticas, se vai comparar use aspas, fazer uso do PDO sempre que possível
-if (!is_numeric($di)) {
+if (!is_numeric($id)) {
 
   echo "Te peguei!";
 
